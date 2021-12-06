@@ -21,6 +21,7 @@
     "moment": "^2.29.1",
     "mongoose": "^6.0.14",
     "mongoose-date-format": "^1.2.0",
+    "parser": "^0.1.4",
     "validator": "^13.7.0"
   }
 }

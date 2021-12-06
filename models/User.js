@@ -15,7 +15,7 @@ const UserSchema = new Schema({
         unique: true,
         required: true,
         // validate email using email regex
-        match: /^([\w\d\.-_]+)@([\w\d\.-]+)\.([a-z\.]{2,6})$/
+        match: [/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/]
     },
     thoughts: [
         {

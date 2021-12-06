@@ -16,7 +16,7 @@ const userController = {
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
             console.log(err);
-            res.sendStatus(400)
+            res.json(err);
         });
     },
 
@@ -35,7 +35,7 @@ const userController = {
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
             console.log(err);
-            res.sendStatus(400)
+            res.json(err)
         })
     },
 
@@ -47,7 +47,7 @@ const userController = {
     },
 
     //Update a user with POST
-    updateUser({ paras, body }, res) {
+    updateUser({ params, body }, res) {
         User.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true})
         .populate({
             path: 'friends',
