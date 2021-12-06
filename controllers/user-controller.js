@@ -1,6 +1,7 @@
-const { User, Thought } = require('../models')
+const { User } = require('../models')
 
 const userController = {
+    //Get all Users
     getAllUser(req, res) {
         User.find({})
         .then(dbUserData => res.json(dbUserData))
@@ -21,7 +22,6 @@ const userController = {
     },
 
     //Create a new User
-
     createUser({ body }, res) {
         User.create(body)
         .then(dbUserData => res.json(dbUserData))
@@ -46,5 +46,43 @@ const userController = {
         User.findOneAndDelete({ _id: params.id })
         .then(dbUserData => res.json(dbUserData))
         .catch(err => res.json(err));
+    },
+
+    //add a friend to the user's friends list
+    addFriend({params}, res) {
+        User.findOneAndUpdate(
+            { _id: params.id},
+            { $push: { friends: params.friendsId}},
+            { new: true }
+        )
+        .then(dbUserData => {
+            if(!dbUserData) {
+                res.status(404).json({ message: 'No User with this ID exists!' } );
+                return;
+            }
+            res.json(dbUserData)
+        })
+        .catch(err => res.json(err))
+    },
+
+    //delete a friend :(
+    deleteFriend({ params }, res) {
+        User.findOneAndUpdate(
+            { _id: params.id },
+            //pulling this data from the document
+            { $pull: { friend: params.friendsId }},
+            //allow document to add newly updated user
+            { new: true }
+        )
+        .then(dbUserData => {
+            if(!dbUserData) {
+                res.status(404).json({ message: 'No User with this ID exists!' });
+            }
+            res.json(dbUserData)
+        })
+        .catch(err => res.status(400).json(err));
     }
-}
+    
+};
+
+module.exports = userController;
