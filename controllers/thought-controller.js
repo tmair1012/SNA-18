@@ -3,6 +3,10 @@ const { Thought, User } = require('../models');
 const thoughtController = {
     getAllThought(req, res) {
         Thought.find({})
+        .populate({
+            path: 'reactions',
+            select: '-__v'
+        })
         .then(dbThoughtData => res.json(dbThoughtData))
         .catch(err => {
             console.log(err);
@@ -12,6 +16,10 @@ const thoughtController = {
 
     getThoughtById({ params }, res) {
         Thought.findOne({ _id: params.id })
+        .populate({
+            path: 'reactions',
+            select: '-__v'
+        })
         .then(dbThoughtData => res.json(dbThoughtData))
         .catch(err => {
             console.log(err);
@@ -21,6 +29,10 @@ const thoughtController = {
 
     createThought({ params, body }, res) {
         Thought.create(body)
+        .populate({
+            path: 'reactions',
+            select: '-__v'
+        })
         .then(({ _id }) => {
             return User.findOneAndUpdate(
                 { _id: params.userId },
@@ -38,6 +50,10 @@ const thoughtController = {
              body, 
              { new: true, runValidators: true}
              )
+             .populate({
+                path: 'reactions',
+                select: '-__v'
+            })
              .then(dbThoughtData => {
                  if(!dbThoughtData){
                      res.status(404).json({ message: 'No Thought with this ID exists' });
@@ -60,6 +76,10 @@ const thoughtController = {
             { $push: { reactions: body }},
             { new: true, runValidators: true}
         )
+        .populate({
+            path: 'reactions',
+            select: '-__v'
+        })
         .then(dbThoughtData => {
             if(!dbThoughtData) {
                 res.status(404).json({ message: 'No Thought with this ID exists '});
@@ -75,6 +95,10 @@ const thoughtController = {
             { $pull: { reaction: { reactionId: params.reactionId } } },
             { new: true }
             )
+            .populate({
+                path: 'reactions',
+                select: '-__v'
+            })
             .then(dbThoughtData => res.json(dbThoughtData))
             .catch(err => res.json(err));
     }

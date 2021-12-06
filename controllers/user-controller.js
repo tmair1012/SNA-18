@@ -8,6 +8,10 @@ const userController = {
             path: 'friends',
             select: '-__v'
         })
+        .populate({
+            path: 'thoughts',
+            select: '-__v'
+        })
         .select('-__v')
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
@@ -19,6 +23,15 @@ const userController = {
     //get one user by id
     getUserById({ params }, res) {
         User.FindOne({ _id: params.id })
+        .populate({
+            path: 'friends',
+            select: '-__v'
+        })
+        .populate({
+            path: 'thoughts',
+            select: '-__v'
+        })
+        .select('-__v')
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
             console.log(err);
@@ -29,6 +42,15 @@ const userController = {
     //Create a new User
     createUser({ body }, res) {
         User.create(body)
+        .populate({
+            path: 'friends',
+            select: '-__v'
+        })
+        .populate({
+            path: 'thoughts',
+            select: '-__v'
+        })
+        .select('-__v')
         .then(dbUserData => res.json(dbUserData))
         .catch(err => res.json(err));
     },
@@ -36,6 +58,15 @@ const userController = {
     //Update a user with POST
     updateUser({ paras, body }, res) {
         User.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true})
+        .populate({
+            path: 'friends',
+            select: '-__v'
+        })
+        .populate({
+            path: 'thoughts',
+            select: '-__v'
+        })
+        .select('-__v')
         .then(dbUserData => {
             if(!dbUserData) {
                 res.status(404).json({ message: 'No user with this ID found!' });
@@ -60,6 +91,15 @@ const userController = {
             { $push: { friends: params.friendsId}},
             { new: true }
         )
+        .populate({
+            path: 'friends',
+            select: '-__v'
+        })
+        .populate({
+            path: 'thoughts',
+            select: '-__v'
+        })
+        .select('-__v')
         .then(dbUserData => {
             if(!dbUserData) {
                 res.status(404).json({ message: 'No User with this ID exists!' } );
@@ -79,6 +119,15 @@ const userController = {
             //allow document to add newly updated user
             { new: true }
         )
+        .populate({
+            path: 'friends',
+            select: '-__v'
+        })
+        .populate({
+            path: 'thoughts',
+            select: '-__v'
+        })
+        .select('-__v')
         .then(dbUserData => {
             if(!dbUserData) {
                 res.status(404).json({ message: 'No User with this ID exists!' });
