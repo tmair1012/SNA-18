@@ -18,7 +18,9 @@
   "homepage": "https://github.com/tmair1012/SNA-18#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "moment": "^2.29.1",
     "mongoose": "^6.0.14",
+    "mongoose-date-format": "^1.2.0",
     "validator": "^13.7.0"
   }
 }

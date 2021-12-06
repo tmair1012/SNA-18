@@ -1,5 +1,5 @@
 const { Schema, model, Types } = require('mongoose');
-
+const moment = require('moment');
 
 
 const ReactionSchema = new Schema(
@@ -19,7 +19,7 @@ const ReactionSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            // add getter for date formating
+            get: () => moment().format("YYYY-MM-DD HH:mm")
         }
     }
 )
@@ -52,4 +52,6 @@ const ThoughtSchema = new Schema (
 
 ThoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length
-})
+});
+
+const Thoughts = model('Thoughts', ThoughtSchema)
