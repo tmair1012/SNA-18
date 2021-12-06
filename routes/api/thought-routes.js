@@ -29,3 +29,5 @@ router
 .route('/thoughts/:thoughtId/reactions')
 .put(addReaction)
 .put(removeReaction)
+
+module.exports = router;
