@@ -1,7 +1,8 @@
+//import mongoose dependencies
 const { Schema, model, Types } = require('mongoose');
 
 
-
+//User document
 const UserSchema = new Schema({
     username: {
         type: String,
@@ -39,10 +40,13 @@ const UserSchema = new Schema({
 }
 );
 
+//user virtual to count friends
 UserSchema.virtual('friendCount').get(function() {
     return this.friends.length;
 });
 
+// declare use rmodel
 const User = model('User', UserSchema);
 
+// export user model
 module.exports = User;

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+// call all user routes
 const{
     getAllUser,
     getUserById,
@@ -23,6 +24,9 @@ router
 .put(updateUser)
 .delete(deleteUser)
 .put(addFriend)
-.put(deleteFriend)
+
+router
+.route('/:id/friends/:friendsId')
+.delete(deleteFriend)
 
 module.exports = router

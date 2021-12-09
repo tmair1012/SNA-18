@@ -1,3 +1,4 @@
+// declare user and thought model
 const { Thought, User } = require('../models');
 
 const thoughtController = {
@@ -8,6 +9,7 @@ const thoughtController = {
             path: 'reactions',
             select: '-__v'
         })
+        .select('-__v')
         .then(dbThoughtData => res.json(dbThoughtData))
         .catch(err => {
             console.log(err);
@@ -91,6 +93,7 @@ const thoughtController = {
             path: 'reactions',
             select: '-__v'
         })
+        .select('-__v')
         .then(dbThoughtData => {
             if(!dbThoughtData) {
                 res.status(404).json({ message: 'No Thought with this ID exists '});
@@ -103,16 +106,19 @@ const thoughtController = {
     removeReaction({ params }, res) {
         Thought.findOneAndUpdate(
             { _id: params.thoughtId },
-            { $pull: { reaction: { reactionId: params.reactionId } } },
+            { $pull: { reactions: { _id: params.reactionId } } },
             { new: true }
             )
-            .populate({
-                path: 'reactions',
-                select: '-__v'
+            .then(dbThoughtData => {
+                console.log(dbThoughtData);
+                if(!dbThoughtData) {
+                    res.status(404).json({ message: 'No Thought with this ID exists '});
+                }
+                res.json(dbThoughtData);
             })
-            .then(dbThoughtData => res.json(dbThoughtData))
             .catch(err => res.json(err));
-    }
+        }
 };
 
+//export thought routes
 module.exports = thoughtController;

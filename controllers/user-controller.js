@@ -1,3 +1,4 @@
+//require user model
 const { User } = require('../models')
 
 const userController = {
@@ -106,7 +107,7 @@ const userController = {
         User.findOneAndUpdate(
             { _id: params.id },
             //pulling this data from the document
-            { $pull: { friend: params.friendsId }},
+            { $pull: { friends:  params.friendsId }},
             //allow document to add newly updated user
             { new: true }
         )
@@ -120,14 +121,17 @@ const userController = {
         })
         .select('-__v')
         .then(dbUserData => {
+            console.log(dbUserData);
             if(!dbUserData) {
                 res.status(404).json({ message: 'No User with this ID exists!' });
             }
             res.json(dbUserData)
         })
+
         .catch(err => res.status(400).json(err));
     }
     
 };
 
+//export routes
 module.exports = userController;
