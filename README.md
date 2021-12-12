@@ -35,5 +35,7 @@ tyleramair@gmail.com
 <img width="1680" alt="chal 18 insomnia" src="https://user-images.githubusercontent.com/87788050/145697894-13fe4408-8a75-4e9c-8977-f06046a0d4eb.png">
 
 ### Walkthrough Videos:
-WalkThrough Part 1: https://www.youtube.com/watch?v=SIN2tn3yZOY
-WalkThrough Part 2: https://www.youtube.com/watch?v=dSl4QCd37hI
+#### WalkThrough Part 1:
+https://www.youtube.com/watch?v=SIN2tn3yZOY
+#### WalkThrough Part 2:
+https://www.youtube.com/watch?v=dSl4QCd37hI
