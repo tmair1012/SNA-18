@@ -1,4 +1,4 @@
-# Challenge-14-SNA
+# Challenge-18-SNA
 
   ## Description: 
   Using a a mongoose database and mongo, create routes to our backend to test crud methods in insomnia
@@ -31,5 +31,9 @@ No License
 tyleramair@gmail.com
 
 ### Screenshots:
+<img width="1680" alt="chal 18 code" src="https://user-images.githubusercontent.com/87788050/145697892-79f298ea-555e-496c-9a6a-c75b6bd72634.png">
+<img width="1680" alt="chal 18 insomnia" src="https://user-images.githubusercontent.com/87788050/145697894-13fe4408-8a75-4e9c-8977-f06046a0d4eb.png">
 
 ### Walkthrough Videos:
+WalkThrough Part 1: https://www.youtube.com/watch?v=SIN2tn3yZOY
+WalkThrough Part 2: https://www.youtube.com/watch?v=dSl4QCd37hI
